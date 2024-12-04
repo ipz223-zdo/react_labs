@@ -61,6 +61,17 @@ export default function Form() {
             </select>
             <div>{errors.receiverCity?.message}</div>
 
+            <h3>Вид відправлення:</h3>
+            <select {...register("shipmentType")}>
+                <option value="">Виберіть вид відправлення</option>
+                <option value="Parcels">Посилки</option>
+                <option value="Cargoes">Вантажі</option>
+                <option value="Documents">Документи</option>
+                <option value="Tyres and discs">Шини та диски</option>
+                <option value="Pallets">Палети</option>
+            </select>
+            <div>{errors.shipmentType?.message}</div>
+
             <h3>Характеристика місць:</h3>
             <table>
                 <thead>
@@ -71,7 +82,7 @@ export default function Form() {
                     <th>Довжина</th>
                     <th>Ширина</th>
                     <th>Висота</th>
-                    <th>Дії</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,42 +93,42 @@ export default function Form() {
                                 <Controller
                                     control={control}
                                     name={`places.${index}.quantity`}
-                                    render={({ field }) => <input type="number" min={1} {...field} />}
+                                    render={({field}) => <input type="number" min={1} {...field} />}
                                 />
                             </td>
                             <td>
                                 <Controller
                                     control={control}
                                     name={`places.${index}.cost`}
-                                    render={({ field }) => <input type="text" {...field} />}
+                                    render={({field}) => <input type="text" {...field} />}
                                 />
                             </td>
                             <td>
                                 <Controller
                                     control={control}
                                     name={`places.${index}.weight`}
-                                    render={({ field }) => <input type="text" {...field} />}
+                                    render={({field}) => <input type="text" {...field} />}
                                 />
                             </td>
                             <td>
                                 <Controller
                                     control={control}
                                     name={`places.${index}.length`}
-                                    render={({ field }) => <input type="text" {...field} />}
+                                    render={({field}) => <input type="text" {...field} />}
                                 />
                             </td>
                             <td>
                                 <Controller
                                     control={control}
                                     name={`places.${index}.width`}
-                                    render={({ field }) => <input type="text" {...field} />}
+                                    render={({field}) => <input type="text" {...field} />}
                                 />
                             </td>
                             <td>
                                 <Controller
                                     control={control}
                                     name={`places.${index}.height`}
-                                    render={({ field }) => <input type="text" {...field} />}
+                                    render={({field}) => <input type="text" {...field} />}
                                 />
                             </td>
                             <td>
@@ -154,10 +165,11 @@ export default function Form() {
                 ))}
                 </tbody>
             </table>
-            <button type="button" onClick={() => append({ quantity: 1, cost: "", weight: "", length: "", width: "", height: "" })}>
+            <button type="button"
+                    onClick={() => append({quantity: 1, cost: "", weight: "", length: "", width: "", height: ""})}>
                 Додати місце
             </button>
-            <br />
+            <br/>
             <button type="submit">Розрахувати вартість</button>
         </form>
     );
