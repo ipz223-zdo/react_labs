@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import Form from './components/Form';
+import './App.css';
 
 function App() {
-  return (
-    <>
-      <h1>Vite + React</h1>
-    </>
-  )
+    return (
+        <div className="App">
+            <h1>Калькулятор вартості доставки</h1>
+            <Form />
+        </div>
+    );
 }
 
 export default App
