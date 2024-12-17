@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "../FormValidation";
 
 export default function Form() {
+    const [isReverseDelivery, setIsReverseDelivery] = useState(false);
+
     const {
         control,
         register,
@@ -15,6 +17,7 @@ export default function Form() {
             senderCity: "",
             receiverCity: "",
             shipmentType: "",
+            reverseDeliveryType: "",
             places: [{ quantity: 1, cost: "", weight: "", length: "", width: "", height: "" }],
         },
     });
@@ -71,6 +74,26 @@ export default function Form() {
                 <option value="Pallets">Палети</option>
             </select>
             <div>{errors.shipmentType?.message}</div>
+
+            <div className="checkbox-container">
+                <h3>Зворотня доставка:</h3>
+                <input
+                    type="checkbox"
+                    onChange={(e) => setIsReverseDelivery(e.target.checked)}
+                />
+            </div>
+
+            {isReverseDelivery && (
+                <>
+                    <label>Вид зворотньої доставки:</label>
+                    <select {...register("reverseDeliveryType")}>
+                        <option value="">Виберіть вид</option>
+                        <option value="Documents">Документи</option>
+                        <option value="Money Transfer">Грошовий переказ</option>
+                    </select>
+                    <div>{errors.reverseDeliveryType?.message}</div>
+                </>
+            )}
 
             <h3>Характеристика місць:</h3>
             <table>

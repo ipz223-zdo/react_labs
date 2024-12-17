@@ -4,6 +4,12 @@ export const validationSchema = yup.object().shape({
     senderCity: yup.string().required("Місто-відправник обов'язкове"),
     receiverCity: yup.string().required("Місто-одержувач обов'язкове"),
     shipmentType: yup.string().required("Вид відправлення обов'язковий"),
+    reverseDeliveryType: yup
+        .string()
+        .when("reverseDelivery", {
+            is: true,
+            then: yup.string().required("Вид зворотної доставки обов'язковий"),
+        }),
     places: yup.array().of(
         yup.object().shape({
             quantity: yup
